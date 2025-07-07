@@ -1,0 +1,36 @@
+# macOS 시스템 파일
+.DS_Store
+
+# CMake 빌드 디렉토리
+/build/
+/build*/                 # 예: build-debug, build-release
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+install_manifest.txt
+
+# Make 빌드 결과물
+*.o
+*.a
+*.so
+*.dylib
+*.out
+*.exe
+*.app
+
+# VS Code 관련 설정
+.vscode/
+*.code-workspace
+
+# Editor/IDE 임시 파일
+*.swp
+*.swo
+*.tmp
+*.bak
+*.user
+.idea/
+
+# 로그 및 기타 임시 파일
+*.log
