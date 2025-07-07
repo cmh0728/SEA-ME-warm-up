@@ -1,21 +1,19 @@
-#ifndef CAR_HPP
-#define CAR_HPP
+#pragma once
 #include <string>
 
+//define Car class
 class Car{
     private:
-        std::string name;
-        double speed;
+        std::string name_;
+        double speed_;
     public : 
-        Car(std::string name,double speed); //기본 생성자
+        Car(std::string name,double speed); 
 
-        Car(const Car& other); //복사 생성자
+        Car(const Car& other);
 
-        Car& operator=(const Car& other); //복사 대입 생성자 
+        Car& operator=(const Car& other); 
 
-        ~Car(); //소멸자
+        ~Car();
 
-        void ShowData();
+        void ShowData(); 
 };
-
-#endif

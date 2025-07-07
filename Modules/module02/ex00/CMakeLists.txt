@@ -9,4 +9,7 @@ include_directories(include)
 add_executable(SmartPointer
     main.cpp
     src/Car.cpp
+    src/Unique.cpp
+    src/Shared.cpp
+    src/Weak.cpp
 )
