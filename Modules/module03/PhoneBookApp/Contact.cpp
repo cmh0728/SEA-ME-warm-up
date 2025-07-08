@@ -1,9 +1,10 @@
-// contact.cpp
 #include "Contact.h"
 
+//constructor
 Contact::Contact(const QString& name, const QString& phone, const QString& email)
     : name_(name), phone_(phone), email_(email) {}
 
+//didn't edit member varriables , just calll varriables
 QString Contact::getName() const {
     return name_;
 }

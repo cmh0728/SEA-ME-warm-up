@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "subwindow.h"
 #include <QFile>
 
 //시그널-슬롯 연결을 connect 해줘야 gui에서 작동함
@@ -11,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     // 버튼 클릭 시 슬롯 연결
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddContact);
-    connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::onSaveToFile);
+    connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::onOpenNewWindow);
 }
 
 MainWindow::~MainWindow()
@@ -45,3 +46,9 @@ void MainWindow::onSaveToFile() {
         file.close();
     }
 }
+
+void MainWindow::onOpenNewWindow() {
+    SubWindow *newWin = new SubWindow(this);  // 부모 지정
+    newWin->show();  // 또는 newWin->exec();  // exec는 모달 창
+}
+

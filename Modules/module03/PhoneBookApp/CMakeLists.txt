@@ -3,6 +3,11 @@ project(PhoneBookApp LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 qt_standard_project_setup()
 
 qt_add_executable(PhoneBookApp
@@ -15,12 +20,17 @@ qt_add_executable(PhoneBookApp
     Contact.cpp
     Contactlist.h
     Contactlist.cpp
+    subwindow.h
+    subwindow.cpp
+    subwindow.ui
 )
+
 
 target_link_libraries(PhoneBookApp
     PRIVATE
         Qt::Core
         Qt::Widgets
+        Qt::Gui
 )
 
 include(GNUInstallDirs)

@@ -1,11 +1,13 @@
-#ifndef MAINWINDOW_H
+#ifndef MAINWINDOW_H //헤더가드
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "Contactlist.h"  // 연락처 리스트 클래스 포함
-#include "Contact.h"      // Contact 클래스도 같이 include (명시적으로 필요하지 않더라도 권장)
+#include <QMainWindow> // for qt mainwindow class
 
-QT_BEGIN_NAMESPACE
+//user defined class
+#include "Contactlist.h"
+#include "Contact.h"
+
+QT_BEGIN_NAMESPACE // qt ui class
 namespace Ui {
 class MainWindow;
 }
@@ -19,13 +21,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+private slots: //signal-slot
     void onAddContact();       // "추가" 버튼 등에서 연결되는 슬롯
     void onSaveToFile();       // 저장 기능
     void refreshContactList(); // 리스트 갱신
+    void onOpenNewWindow();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui; //ui object pointer
     ContactList contactList_;  // 연락처 저장 객체
 };
 

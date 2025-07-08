@@ -1,13 +1,24 @@
-// contactlist.cpp
 #include "Contactlist.h"
+
+
+/*
+Qvector function
+1. append(val)
+2. prepend(val)
+3. insert(idx, val)
+4. remove(idx)
+5. clear()
+*/
+
 
 void ContactList::addContact(const Contact& contact) {
     contacts_.append(contact);
 }
 
-void ContactList::removeContact(int index) {
-    if (index >= 0 && index < contacts_.size()) {
-        contacts_.removeAt(index);
+void ContactList::removeContact(int idx) {
+    if (idx >= 0 && idx < contacts_.size()) //index error guard
+    {
+        contacts_.removeAt(idx);
     }
 }
 
@@ -24,3 +35,4 @@ QVector<Contact> ContactList::searchByName(const QString& keyword) const {
     }
     return results;
 }
+

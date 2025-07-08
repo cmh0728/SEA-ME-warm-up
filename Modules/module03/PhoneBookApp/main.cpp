@@ -3,8 +3,8 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);  // Qt 어플리케이션 객체 생성
-    MainWindow w;                // MainWindow 인스턴스 생성
-    w.show();                    // 윈도우 보이기
-    return a.exec();             // 이벤트 루프 실행
+    QApplication a(argc, argv);  // Qt application instance
+    MainWindow w;                // MainWindow instance
+    w.show();                    // window show
+    return a.exec();             // event loop
 }
