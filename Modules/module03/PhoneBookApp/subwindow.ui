@@ -32,14 +32,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>200</y>
-     <width>58</width>
-     <height>16</height>
+     <x>190</x>
+     <y>160</y>
+     <width>151</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="text">
-    <string>qlabel</string>
+    <string>FUCKING SUBWINDOW!!!</string>
    </property>
   </widget>
  </widget>

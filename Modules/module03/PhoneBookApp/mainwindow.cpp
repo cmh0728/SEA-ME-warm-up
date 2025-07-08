@@ -4,15 +4,19 @@
 #include <QFile>
 
 //시그널-슬롯 연결을 connect 해줘야 gui에서 작동함
+//add--> add list
+//remove --> remove
+//load --> update list
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // 버튼 클릭 시 슬롯 연결
-    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddContact);
-    connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::onOpenNewWindow);
+    // signal-slot connection part(not required to edit .h)
+    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddContact); //add button
+    connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::onOpenNewWindow); //load button --> update list
+    connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::onRemoveContact); //remove button
 }
 
 MainWindow::~MainWindow()
@@ -20,12 +24,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//for add button
 void MainWindow::onAddContact() {
     QString name = ui->nameEdit->text();
     QString phone = ui->phoneEdit->text();
     QString email = ui->emailEdit->text();
     contactList_.addContact(Contact(name, phone, email));
     refreshContactList();
+}
+
+//for remove button --> 이 부분부터 수정하기
+void MainWindow::onRemoveContact(){
+    contactList_.removeContact(0); // idx edit require(chose name--> idx)
 }
 
 void MainWindow::refreshContactList() {

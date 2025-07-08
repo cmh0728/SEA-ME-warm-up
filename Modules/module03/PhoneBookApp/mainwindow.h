@@ -26,6 +26,7 @@ private slots: //signal-slot
     void onSaveToFile();       // 저장 기능
     void refreshContactList(); // 리스트 갱신
     void onOpenNewWindow();
+    void onRemoveContact();
 
 private:
     Ui::MainWindow *ui; //ui object pointer
