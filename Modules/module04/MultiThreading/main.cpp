@@ -1,47 +1,42 @@
 #include <iostream>
 #include <thread>
-#include <vector>
- 
-void worker(std::vector<long long>::iterator start, std::vector<long long>::iterator end, long long* result) {
-    long long sum = 0;
-    for (auto iter = start; iter < end; ++ iter) {
-        sum += *iter;
+#include <chrono>
+
+/*
+멀티쓰레딩 -->  여러 동작이 병렬로 처리됨(동시에 실행)
+*/ 
+
+void task1() {
+    for (int i = 0; i < 5; ++i) {
+        std::cout << "Task 1: " << i << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 느리게
     }
- 
-    *result = sum;
- 
-    // thread id
-    std::thread::id this_id = std::this_thread::get_id();
-    printf("쓰레드 %p 에서 %lld 부터 %lld 까지 계산한 결과 : %lld\n", this_id, *start, *(end - 1), sum);
 }
- 
-int main(void) {
-    const int MAX = 1000000;
-    std::vector<long long> data(MAX);
-    for (int i = 0; i < MAX; i++)
-        data[i] = i;
- 
-    // thread를 이용한 합 구하기
-    const int NUM_OF_THRHEAD = 10;
-    std::vector<long long> partial_sums(NUM_OF_THRHEAD);
- 
-    std::vector<std::thread> workers;
-    for (int i = 0; i < NUM_OF_THRHEAD; i++) {
-        workers.push_back(
-            std::thread(
-                worker, data.begin() + i * (MAX / NUM_OF_THRHEAD),
-                data.begin() + (i + 1) * (MAX / NUM_OF_THRHEAD),
-                &partial_sums[i]));
+
+void task2() {
+    for (int i = 0; i < 5; ++i) {
+        std::cout << "Task 2: " << i << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 느리게
     }
- 
-    for (int i = 0; i < NUM_OF_THRHEAD; i++)
-        workers[i].join();
- 
-    long long total = 0;
-    for (int i = 0; i < NUM_OF_THRHEAD; i++)
-        total += partial_sums[i];
- 
-    std::cout << "Total Sum : " << total << std::endl;
- 
+}
+
+void task3() {
+    for (int i = 0; i < 5; ++i) {
+        std::cout << "Task 3: " << i << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 느리게
+    }
+}
+
+
+int main() {
+    std::thread t1(task1);
+    std::thread t2(task2);
+    std::thread t3(task3);
+
+    t1.join();
+    t2.join();
+    t3.join();
+
+    std::cout << "Main thread done." << std::endl;
     return 0;
 }
