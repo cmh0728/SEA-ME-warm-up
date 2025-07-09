@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "subwindow.h"
+#include <QMessageBox>
 #include <QFile>
 
 //시그널-슬롯 연결을 connect 해줘야 gui에서 작동함
@@ -38,6 +39,10 @@ MainWindow::MainWindow(QWidget *parent)
     //save and exit
     connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::onSaveAndExit);
 
+    //search by name
+    connect(ui->searchEdit, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
+
+
 }
 
 
@@ -46,7 +51,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//for add button
+//add button
 void MainWindow::onAddContact() {
     //input
     QString name = ui->nameEdit->text();
@@ -56,13 +61,14 @@ void MainWindow::onAddContact() {
     refreshContactList();
 }
 
-//for remove button --> 이 부분부터 수정하기
+//remove button
 void MainWindow::onRemoveContact(){
-    contactList_.removeContact(0); // idx edit require(chose name--> idx)
+    int index = ui->contactListWidget->currentRow();  //선택된 항목 인덱스 가져오기
+    contactList_.removeContact(index); // idx edit require(chose name--> idx)
     refreshContactList();
 }
 
-//list refresh(초기화)
+//list refresh automatically(초기화)
 void MainWindow::refreshContactList() {
     ui->contactListWidget->clear();
     for (const auto& contact : contactList_.getContacts()) {
@@ -70,20 +76,35 @@ void MainWindow::refreshContactList() {
     }
 }
 
-//open sub window in mainwindow
+//load button
 void MainWindow::onOpenNewWindow() {
-    SubWindow *newWin = new SubWindow(this);  // 부모 지정
-    newWin->show();
+    int index = ui->contactListWidget->currentRow();  //선택된 항목 인덱스 가져오기
+
+    if (index >= 0 && index < contactList_.getContacts().size()) {
+        const Contact &c = contactList_.getContacts().at(index);
+
+        SubWindow *infoWindow = new SubWindow(this);
+        infoWindow->setContactInfo(c.getName(), c.getPhone(), c.getEmail());
+
+        infoWindow->show();
+    } else {
+        // 아무 항목도 선택되지 않은 경우 (선택)
+        QMessageBox::information(this, "No Selection", "Please select a contact from the list.");
+    }
 }
 
 //for doublec click on list --> new window(more information)
 void MainWindow::onContactDoubleClicked(QListWidgetItem *item) {
-    QString contactInfo = item->text();
+    int index = ui->contactListWidget->row(item);  // 선택된 인덱스
 
-    // 새 창 생성
-    SubWindow *infoWindow = new SubWindow(this);
-    infoWindow->setInfoText(contactInfo);
-    infoWindow->show();
+    if (index >= 0 && index < contactList_.getContacts().size()) {
+        const Contact &c = contactList_.getContacts().at(index);
+
+        SubWindow *infoWindow = new SubWindow(this);
+        infoWindow->setContactInfo(c.getName(), c.getPhone(), c.getEmail());
+
+        infoWindow->show();
+    }
 }
 
 // to save contact with exit
@@ -123,4 +144,18 @@ void MainWindow::loadFromFile() {
         refreshContactList();
     }
 }
+
+//search
+void MainWindow::onSearchTextChanged(const QString &text) {
+    ui->contactListWidget->clear();
+
+    const QList<Contact> &allContacts = contactList_.getContacts();
+
+    for (const auto &contact : allContacts) {
+        if (text.isEmpty() || contact.getName().contains(text, Qt::CaseInsensitive)) {
+            ui->contactListWidget->addItem(contact.getName());
+        }
+    }
+}
+
 

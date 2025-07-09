@@ -31,6 +31,7 @@ private slots: //signal-slot
     void onRemoveContact();
     void onContactDoubleClicked(QListWidgetItem *item);
     void onSaveAndExit();
+    void onSearchTextChanged(const QString &text);
 
 private:
     Ui::MainWindow *ui; //ui object pointer

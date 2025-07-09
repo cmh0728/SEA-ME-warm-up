@@ -2,12 +2,13 @@
 #include "ui_subwindow.h"
 
 SubWindow::SubWindow(QWidget *parent)
-    : QDialog(parent), ui(new Ui::SubWindow)
+    : QDialog(parent),
+    ui(new Ui::SubWindow)
 {
     ui->setupUi(this);
 
-    // 버튼 눌렀을 때 동작 같은 것도 여기에 연결 가능
-    connect(ui->closeButton, &QPushButton::clicked, this, &SubWindow::close);
+    //signal-slot connection
+    connect(ui->closeButton, &QPushButton::clicked, this, &SubWindow::close); //close button 구현
 }
 
 SubWindow::~SubWindow()
@@ -15,6 +16,15 @@ SubWindow::~SubWindow()
     delete ui;
 }
 
-void SubWindow::setInfoText(const QString& text) {
-    ui->label->setText(text);  // QLabel 등 수정 가능
+void SubWindow::setContactInfo(const QString &name, const QString &phone, const QString &email, const QPixmap &photo)
+{
+    ui->nameLabel->setText("Name: " + name);
+    ui->phoneLabel->setText("Phone: " + phone);
+    ui->emailLabel->setText("Email: " + email);
+
+    if (!photo.isNull()) {
+        ui->photoLabel->setPixmap(photo);
+    } else {
+        ui->photoLabel->setText("[No Image]");
+    }
 }
