@@ -13,6 +13,17 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // window name setting
+    setWindowTitle("PhoneBook App - Kevin");
+
+
+    //입력창 메세지 출력(일반적으로 생성자에서 선언)
+    ui->nameEdit->setPlaceholderText("                              Input your Name");
+    ui->phoneEdit->setPlaceholderText("                       Input your Phone number");
+    ui->emailEdit->setPlaceholderText("                             Input your E-mail");
+    ui->searchEdit->setPlaceholderText("             Input to search : Name");
+
     // signal-slot connection part(not required to edit .h)
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddContact); //add button
     connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::onOpenNewWindow); //load button --> update list
@@ -26,18 +37,21 @@ MainWindow::~MainWindow()
 
 //for add button
 void MainWindow::onAddContact() {
+    //input
     QString name = ui->nameEdit->text();
     QString phone = ui->phoneEdit->text();
     QString email = ui->emailEdit->text();
-    contactList_.addContact(Contact(name, phone, email));
+    contactList_.addContact(Contact(name, phone, email)); //add function
     refreshContactList();
 }
 
 //for remove button --> 이 부분부터 수정하기
 void MainWindow::onRemoveContact(){
     contactList_.removeContact(0); // idx edit require(chose name--> idx)
+    refreshContactList();
 }
 
+//list refresh(초기화)
 void MainWindow::refreshContactList() {
     ui->contactListWidget->clear();
     for (const auto& contact : contactList_.getContacts()) {

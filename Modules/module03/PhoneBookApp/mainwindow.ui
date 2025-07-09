@@ -33,21 +33,21 @@
      <item>
       <widget class="QLineEdit" name="nameEdit">
        <property name="text">
-        <string>                             Input your name</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLineEdit" name="phoneEdit">
        <property name="text">
-        <string>                       Input your Phone number</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLineEdit" name="emailEdit">
        <property name="text">
-        <string>                             Input your E-mail</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -66,9 +66,9 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="searchEdit">
          <property name="text">
-          <string>             Input to search : Name</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -90,7 +90,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>340</y>
+      <y>350</y>
       <width>451</width>
       <height>41</height>
      </rect>
@@ -126,7 +126,7 @@
      <x>0</x>
      <y>0</y>
      <width>810</width>
-     <height>24</height>
+     <height>37</height>
     </rect>
    </property>
   </widget>
