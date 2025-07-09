@@ -36,3 +36,7 @@ QVector<Contact> ContactList::searchByName(const QString& keyword) const {
     return results;
 }
 
+void ContactList::clear() {
+    contacts_.clear();
+}
+

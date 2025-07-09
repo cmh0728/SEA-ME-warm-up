@@ -16,7 +16,7 @@ public:
     explicit SubWindow(QWidget *parent = nullptr);
     ~SubWindow();
 
-    void setInfoText(const QString& text);  // 외부에서 텍스트를 설정할 수 있게!
+    void setInfoText(const QString &text);// 외부에서 텍스트를 설정할 수 있게!
 
 private:
     Ui::SubWindow *ui;

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow> // for qt mainwindow class
+#include <QListWidgetItem>
 
 //user defined class
 #include "Contactlist.h"
@@ -20,6 +21,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void loadFromFile();
 
 private slots: //signal-slot
     void onAddContact();       // "추가" 버튼 등에서 연결되는 슬롯
@@ -27,6 +29,8 @@ private slots: //signal-slot
     void refreshContactList(); // 리스트 갱신
     void onOpenNewWindow();
     void onRemoveContact();
+    void onContactDoubleClicked(QListWidgetItem *item);
+    void onSaveAndExit();
 
 private:
     Ui::MainWindow *ui; //ui object pointer

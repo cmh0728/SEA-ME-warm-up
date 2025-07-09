@@ -16,6 +16,7 @@ public:
     void removeContact(int idx);
     QVector<Contact> getContacts() const;
     QVector<Contact> searchByName(const QString& keyword) const;
+    void clear();
 
 private:
     QVector<Contact> contacts_; //list of Contacts
