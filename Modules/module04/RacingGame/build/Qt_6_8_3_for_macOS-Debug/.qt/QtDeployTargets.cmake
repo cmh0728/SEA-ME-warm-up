@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_RacingGame_FILE /Users/choeminhyeog/RacingGame/build/Qt_6_8_3_for_macOS-Debug/RacingGame.app/Contents/MacOS/RacingGame)
+set(__QT_DEPLOY_TARGET_RacingGame_TYPE EXECUTABLE)
