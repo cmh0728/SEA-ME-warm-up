@@ -13,9 +13,9 @@ public:
     void run() override;
 
 private:
-    Car* m_car;
-    RaceTrack* m_track;
-    QMutex* m_mutex;
+    Car* m_car; //car object
+    RaceTrack* m_track; //track object
+    QMutex* m_mutex; //for data protect between thread
 };
 
 #endif // CARTHREAD_H

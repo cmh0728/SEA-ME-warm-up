@@ -1,12 +1,9 @@
-#include "racinggame.h"
 #include <QApplication>
+#include "racinggame.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
     RacingGame game;
     game.show();
-    return a.exec();
+    return app.exec();
 }
-
-

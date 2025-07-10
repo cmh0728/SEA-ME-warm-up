@@ -7,8 +7,8 @@ public:
     int finishLine() const;
 
 private:
-    int m_size;
-    int m_finishLine;
+    int m_size; //track size
+    int m_finishLine; //finish line information
 };
 
 #endif // RACETRACK_H

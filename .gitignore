@@ -34,3 +34,7 @@ install_manifest.txt
 
 # 로그 및 기타 임시 파일
 *.log
+
+# png jpg 파일들
+*.png
+*.jpg
