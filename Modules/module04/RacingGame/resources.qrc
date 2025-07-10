@@ -3,5 +3,6 @@
         <file>car1.png</file>
         <file>car2.png</file>
         <file>track.png</file>
+        <file>IntroImage.png</file>
     </qresource>
 </RCC>

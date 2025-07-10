@@ -5,14 +5,27 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 
+//constructor
 RacingGame::RacingGame(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::RacingGame), m_track(new RaceTrack(1000, 1000)), m_countdownTimer(new QTimer(this)), m_countdownValue(3) {
     ui->setupUi(this);
 
+    // 인트로 이미지 세팅
+    QPixmap introPixmap(":/images/IntroImage.png");  // 리소스에 등록한 인트로 이미지 경로
+    ui->introLabel->setPixmap(introPixmap.scaled(
+        ui->introLabel->size(),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation));
+
+    ui->introLabel->setAlignment(Qt::AlignCenter);
+    ui->introLabel->lower();
+
     // 초기 화면 버튼 연결
     connect(ui->startButton, &QPushButton::clicked, this, [this]() {
+        //버튼 누르면 숨기기
         ui->startButton->hide();
         ui->howToPlayButton->hide();
+        ui->introLabel->hide();  // 인트로 이미지 숨기기
 
         // 대신 QLabel로 트랙 배경을 생성
         QPixmap track(":/images/track.png");

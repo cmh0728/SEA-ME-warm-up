@@ -36,5 +36,5 @@ install_manifest.txt
 *.log
 
 # png jpg 파일들
-*.png
-*.jpg
+# *.png
+# *.jpg
