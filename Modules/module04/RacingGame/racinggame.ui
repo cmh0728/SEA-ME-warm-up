@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>800</height>
+    <height>957</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,10 @@
    <widget class="QFrame" name="trackFrame">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>-30</y>
-      <width>1200</width>
-      <height>700</height>
+      <x>10</x>
+      <y>-20</y>
+      <width>1181</width>
+      <height>911</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -35,15 +35,29 @@
     <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>330</y>
-       <width>160</width>
-       <height>80</height>
+       <x>431</x>
+       <y>713</y>
+       <width>281</width>
+       <height>131</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="startButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #e74c3c;  /* 빨간색 */
+    color: white;               /* 글자색 흰색 */
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 16px;
+}
+QPushButton:hover {
+    background-color: #c0392b;  /* 마우스 오버 시 어두운 빨강 */
+}
+</string>
+        </property>
         <property name="text">
          <string>start</string>
         </property>
@@ -51,6 +65,20 @@
       </item>
       <item>
        <widget class="QPushButton" name="howToPlayButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #e74c3c;  /* 빨간색 */
+    color: white;               /* 글자색 흰색 */
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 16px;
+}
+QPushButton:hover {
+    background-color: #c0392b;  /* 마우스 오버 시 어두운 빨강 */
+}
+</string>
+        </property>
         <property name="text">
          <string>How To Play</string>
         </property>
@@ -59,13 +87,22 @@
      </layout>
     </widget>
     <widget class="QLabel" name="introLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
-       <x>27</x>
-       <y>30</y>
-       <width>771</width>
-       <height>471</height>
+       <x>0</x>
+       <y>20</y>
+       <width>1181</width>
+       <height>891</height>
       </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="text">
       <string>photo</string>
