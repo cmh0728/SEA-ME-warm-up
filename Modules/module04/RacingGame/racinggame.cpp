@@ -4,6 +4,8 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QMessageBox>
+#include <QRandomGenerator>  // 상단에 include 추가
+
 
 //constructor
 RacingGame::RacingGame(QWidget* parent)
@@ -19,6 +21,7 @@ RacingGame::RacingGame(QWidget* parent)
 
     ui->introLabel->setAlignment(Qt::AlignCenter);
     ui->introLabel->lower();
+
 
     // 초기 화면 버튼 연결
     connect(ui->startButton, &QPushButton::clicked, this, [this]() {
@@ -38,9 +41,28 @@ RacingGame::RacingGame(QWidget* parent)
         delete m_track;
         m_track = new RaceTrack(0, ui->trackFrame->height());  // 트랙의 길이(세로)
 
+
+        // 기존 객체들 정리
+        for (CarThread* thread : m_threads) {
+            thread->wait();
+            delete thread;
+        }
+        m_threads.clear();
+
+        qDeleteAll(m_cars);
+        m_cars.clear();
+        m_labels.clear();
+
+
         // 자동차 생성
-        m_cars.append(new Car("Car 1", 5));
-        m_cars.append(new Car("Car 2", 4));
+        QStringList carNames = {"Car 1", "Car 2"};
+        for (int i = 0; i < carNames.size(); ++i) {
+            int randomSpeed = QRandomGenerator::global()->bounded(4, 7);  // 4~6
+            Car* car = new Car(carNames[i], randomSpeed);
+            m_cars.append(car);
+        }
+
+
 
         for (int i = 0; i < m_cars.size(); ++i) {
             QLabel* label = new QLabel(ui->trackFrame);
