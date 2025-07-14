@@ -38,6 +38,9 @@ private:
     QTimer* m_countdownTimer;
     int m_countdownValue;
     QLabel* m_countdownLabel;
+    QString m_user1Name;
+    QString m_user2Name;
+    bool m_raceFinished = false;
 };
 
 

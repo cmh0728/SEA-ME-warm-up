@@ -4,7 +4,8 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QMessageBox>
-#include <QRandomGenerator>  // 상단에 include 추가
+#include <QRandomGenerator>
+#include <QInputDialog>
 
 
 //constructor
@@ -29,6 +30,13 @@ RacingGame::RacingGame(QWidget* parent)
         ui->startButton->hide();
         ui->howToPlayButton->hide();
         ui->introLabel->hide();  // 인트로 이미지 숨기기
+
+        // 사용자 이름 입력
+        m_user1Name = QInputDialog::getText(this, "Player 1", "Enter Player 1's name : ");
+        m_user2Name = QInputDialog::getText(this, "Player 2", "Enter Player 2's name : ");
+
+        if (m_user1Name.isEmpty()) m_user1Name = "Player 1";
+        if (m_user2Name.isEmpty()) m_user2Name = "Player 2";
 
         // 대신 QLabel로 트랙 배경을 생성
         QPixmap track(":/images/track2.png");
@@ -141,14 +149,28 @@ void RacingGame::startRace() {
 }
 
 void RacingGame::updateCarPosition(QString name, int pos) {
-    if (m_labels.contains(name)) {
+    if (m_labels.contains(name) && !m_raceFinished) {
         QLabel* label = m_labels[name];
 
-        // Finish를 위쪽으로 가정 → 높이에서 pos를 빼서 위로 이동
         int maxY = ui->trackFrame->height() - label->height();
         int y = qMax(0, maxY - pos);
+        label->move(label->x(), y);
 
-        label->move(label->x(), y);  // Y축 이동
+        // 도착선 도달 확인
+        if (y <= 0) {
+            m_raceFinished = true;
+
+            QString winner = (name == "Car 1") ? m_user1Name : m_user2Name;
+            QMessageBox::information(this, "Race Finished", winner + " wins the race!");
+
+            // 모든 쓰레드 종료
+            for (CarThread* thread : m_threads) {
+                thread->requestInterruption();  // CarThread 내에서 중단 체크 필요
+            }
+
+            QTimer::singleShot(1000, qApp, &QApplication::quit);  // 1초 후 앱 종료
+        }
     }
 }
+
 
